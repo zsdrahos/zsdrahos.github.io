@@ -1,164 +1,127 @@
-/**
-* Template Name: BizLand
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 (function() {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
   const select = (el, all = false) => {
-    el = el.trim()
-    if (all) {
-      return [...document.querySelectorAll(el)]
-    } else {
-      return document.querySelector(el)
-    }
-  }
-
-  /**
-   * Easy event listener function
-   */
+    el = el.trim();
+    return all ? [...document.querySelectorAll(el)] : document.querySelector(el);
+  };
+  
   const on = (type, el, listener, all = false) => {
-    let selectEl = select(el, all)
-    if (selectEl) {
-      if (all) {
-        selectEl.forEach(e => e.addEventListener(type, listener))
-      } else {
-        selectEl.addEventListener(type, listener)
-      }
+    let selectEl = select(el, all);
+    if (!selectEl) return;
+  
+    if (all) {
+      selectEl.forEach(e => e.addEventListener(type, listener));
+    } else {
+      selectEl.addEventListener(type, listener);
     }
-  }
-
-  /**
-   * Easy on scroll event listener 
-   */
+  };
+  
   const onscroll = (el, listener) => {
-    el.addEventListener('scroll', listener)
-  }
+    el.addEventListener('scroll', listener);
+  };
+  
 
-  /**
-   * Navbar links active state on scroll
-   */
-  let navbarlinks = select('#navbar .scrollto', true)
+  const navbarlinks = select('#navbar .scrollto', true);
+
   const navbarlinksActive = () => {
-    let position = window.scrollY + 200
+    const position = window.scrollY + 200;
     navbarlinks.forEach(navbarlink => {
-      if (!navbarlink.hash) return
-      let section = select(navbarlink.hash)
-      if (!section) return
-      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-        navbarlink.classList.add('active')
+      if (!navbarlink.hash) return;
+      const section = select(navbarlink.hash);
+      if (!section) return;
+      if (position >= section.offsetTop && position <= section.offsetTop + section.offsetHeight) {
+        navbarlink.classList.add('active');
       } else {
-        navbarlink.classList.remove('active')
+        navbarlink.classList.remove('active');
       }
-    })
-  }
-  window.addEventListener('load', navbarlinksActive)
-  onscroll(document, navbarlinksActive)
-
-  /**
-   * Scrolls to an element with header offset
-   */
-  const scrollto = (el) => {
-    let header = select('#header')
-    let offset = header.offsetHeight
-
+    });
+  };
+  
+  window.addEventListener('load', navbarlinksActive);
+  onscroll(document, navbarlinksActive);
+  
+  const scrollto = el => {
+    const header = select('#header');
+    let offset = header.offsetHeight;
+  
     if (!header.classList.contains('header-scrolled')) {
-      offset -= 16
+      offset -= 16;
     }
-
-    let elementPos = select(el).offsetTop
+  
+    const elementPos = select(el).offsetTop;
     window.scrollTo({
       top: elementPos - offset,
       behavior: 'smooth'
-    })
-  }
-
-  /**
-   * Header fixed top on scroll
-   */
-  let selectHeader = select('#header')
-  if (selectHeader) {
-    let headerOffset = selectHeader.offsetTop
-    let nextElement = selectHeader.nextElementSibling
+    });
+  };
+  
+  const handleHeader = (selectHeader, nextElement) => {
+    const headerOffset = selectHeader.offsetTop;
     const headerFixed = () => {
-      if ((headerOffset - window.scrollY) <= 0) {
-        selectHeader.classList.add('fixed-top')
-        nextElement.classList.add('scrolled-offset')
+      if (headerOffset - window.scrollY <= 0) {
+        selectHeader.classList.add('fixed-top');
+        nextElement.classList.add('scrolled-offset');
       } else {
-        selectHeader.classList.remove('fixed-top')
-        nextElement.classList.remove('scrolled-offset')
+        selectHeader.classList.remove('fixed-top');
+        nextElement.classList.remove('scrolled-offset');
       }
-    }
-    window.addEventListener('load', headerFixed)
-    onscroll(document, headerFixed)
+    };
+    window.addEventListener('load', headerFixed);
+    onscroll(document, headerFixed);
+  };
+  
+  let selectHeader = select('#header');
+  if (selectHeader) {
+    let headerOffset = selectHeader.offsetTop;
+    let nextElement = selectHeader.nextElementSibling;
+    handleHeader(selectHeader, nextElement);
   }
-
+  
   let selectLogo = document.getElementById('logo');
-
   if (selectLogo) {
     let headerOffset = selectLogo.offsetTop;
-    const headerFixed = () => {
-      if ((headerOffset - window.scrollY) <= 0) {
+    const handleLogoHeader = () => {
+      if (headerOffset - window.scrollY <= 0) {
         selectLogo.parentNode.classList.add('fixed-top-logo');
       } else {
         selectLogo.parentNode.classList.remove('fixed-top-logo');
       }
     };
   
-    window.addEventListener('load', headerFixed);
-    window.addEventListener('scroll', headerFixed); // Figyeli a görgetést és hívja meg a headerFixed függvényt
+    window.addEventListener('load', handleLogoHeader);
+    window.addEventListener('scroll', handleLogoHeader);
   }
+  const navbar = select('#navbar');
 
-
-
-  
-  /**
-   * Mobile nav toggle
-   */
   on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
-  })
+    navbar.classList.toggle('navbar-mobile');
+    this.classList.toggle('bx-menu');
+    this.classList.toggle('bx-x');
+    this.classList.toggle('feher');
+  });
 
-  /**
-   * Mobile nav dropdowns activate
-   */
-  on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
-      e.preventDefault()
-      this.nextElementSibling.classList.toggle('dropdown-active')
+  navbar.addEventListener('click', function(e) {
+    if (this.classList.contains('navbar-mobile')) {
+      if (e.target.classList.contains('nav-link')) {
+        this.classList.remove('navbar-mobile');
+        select('.mobile-nav-toggle').classList.remove('bx-x');
+        select('.mobile-nav-toggle').classList.remove('feher');
+        select('.mobile-nav-toggle').classList.add('bx-menu');
+      }
     }
-  }, true)
-
+  });
   
-
-
-
-
-
   
-  /**
-   * Animation on scroll
-   */
   window.addEventListener('load', () => {
     AOS.init({
       duration: 1000,
       easing: 'ease-in-out',
       once: true,
       mirror: false
-    })
+    });
   });
+  
 
-  /**
-   * Initiate Pure Counter 
-   */
-  new PureCounter();
 
 })()

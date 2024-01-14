@@ -1,14 +1,4 @@
-/**
-* Template Name: BizLand
-* Updated: Sep 18 2023 with Bootstrap v5.3.2
-* Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -19,10 +9,6 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  color: #ffffff;
-  text-decoration: none;
-}
 
 h1,
 h2,
@@ -33,9 +19,13 @@ h6 {
   font-family: "Roboto", sans-serif;
 }
 
-.text p{
+.text{
     text-align: justify;
-    padding-right: 340px;
+   
+}
+
+.ml30{
+  margin-left: 30px;
 }
 
 
@@ -112,15 +102,13 @@ h6 {
   float: right;
 }
 
-/* Alapértelmezett stílusok és átmenet */
 #logo {
-    max-width: 100%; /* A logó maximális szélessége a konténer méretéhez igazítva */
-    transition: max-width 0.3s ease; /* Átmenet hozzáadása a logó méretéhez (0.3 másodperc hosszan és könnyű animációval) */
+    max-width: 100%; 
+    transition: max-width 0.3s ease; 
   }
-  
-  /* Amikor a logó fixálódik, akkor a kisebb méret */
+
   .fixed-top-logo #logo {
-    max-width: 80px; /* A logó kisebb mérete, amikor fixálódik */
+    max-width: 80px; 
   }
 
 #header .logo {
@@ -198,16 +186,15 @@ h6 {
 .navbar>ul>li>a:before {
   content: "";
   position: absolute;
-  width: 100%;
+  width: 0; 
   height: 2px;
   bottom: -6px;
-  left: 0;
+  left: 50%; 
   background-color: #E6733C;
   visibility: hidden;
-  width: 0px;
   transition: all 0.3s ease-in-out 0s;
+  transform: translateX(-50%); 
 }
-
 .navbar a:hover:before,
 .navbar li:hover>a:before,
 .navbar .active:before {
@@ -462,12 +449,55 @@ li span {
   color: #E6733C;
 }
 
+.orange {
+  color: #E6733C; 
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-bold-italic {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.font-italic{
+  font-style: italic;
+}
+
+.circle{
+  background: #fff;
+  box-shadow: 0px 6px 15px rgba(16, 110, 234, 0.12);
+  font-size: 24px;
+  padding: 20px;
+  margin-right: 15px;
+  color: #E6733C;
+  border-radius: 50px;
+}
+
+.link{
+  text-decoration: none; color: #444444;
+}
+
+/* Alapértelmezett stílusok */
+.font-bold {
+  font-weight: bold;
+}
+
+/* Behúzás a block típusú span elemekhez */
+.block-indent {
+  display: block;
+  margin-left: 20px; /* Vagy más méretet állíthatsz be a behúzáshoz */
+}
+
+
 .card {
   flex: 1 0 auto;
 }
 
 .course .box ul li {
-  padding-bottom: 16px;
+  /*padding-bottom: 16px;*/
 }
 
 .course .box ul i {
@@ -504,6 +534,8 @@ li span {
 
 .btn-more:hover {
   background: #c74509;
+  color: #fff;
+
 }
 
 .course .featured h3 {
@@ -579,7 +611,7 @@ li span {
   color: #E6733C;
   border-radius: 50%;
   padding: 8px;
-  border: 2px dotted #b3d1fa;
+  border: 2px dotted #e6723c46;
 }
 
 .contact .info-box h3 {
@@ -596,102 +628,6 @@ li span {
   margin-bottom: 0;
 }
 
-.contact .php-email-form {
-  box-shadow: 0 0 30px rgba(214, 215, 216, 0.4);
-  padding: 30px;
-}
-
-.contact .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #ed3c0d;
-  text-align: left;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .error-message br+br {
-  margin-top: 25px;
-}
-
-.contact .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #18d26e;
-  text-align: center;
-  padding: 15px;
-  font-weight: 600;
-}
-
-.contact .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-}
-
-.contact .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #18d26e;
-  border-top-color: #eee;
-  animation: animate-loading 1s linear infinite;
-}
-
-.contact .php-email-form .form-group {
-  margin-bottom: 20px;
-}
-
-.contact .php-email-form input,
-.contact .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-}
-
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-  border-color: #E6733C;
-}
-
-.contact .php-email-form input {
-  padding: 10px 15px;
-}
-
-.contact .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.contact .php-email-form button[type=submit] {
-  background: #E6733C;
-  border: 0;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.contact .php-email-form button[type=submit]:hover {
-  background: #3b8af2;
-}
-
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/*--------------------------------------------------------------
-# Footer
---------------------------------------------------------------*/
 #footer {
   background: #fff;
   padding: 0 0 30px 0;
@@ -860,6 +796,10 @@ li span {
   color: #444444;
 }
 
+.feher {
+  color: #fff;
+}
+
 @media (max-width: 768px) {
 
   #footer .copyright,
@@ -868,4 +808,5 @@ li span {
     text-align: center;
     padding: 2px 0;
   }
+  
 }
