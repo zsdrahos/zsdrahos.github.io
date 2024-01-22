@@ -25,7 +25,8 @@
   const navbarlinks = select('#navbar .scrollto', true);
 
   const navbarlinksActive = () => {
-    const position = window.scrollY + 200;
+    const offset = 100; // Itt definiáljuk az extra görgetést
+    const position = window.scrollY + 200 + offset; // 200 eredeti művelet, +100 az extra görgetés a header kitakarása miatt
     navbarlinks.forEach(navbarlink => {
       if (!navbarlink.hash) return;
       const section = select(navbarlink.hash);
@@ -37,24 +38,38 @@
       }
     });
   };
+
+ on('click', '.nav-link', function(e) {
+  if (this.hash !== '') {
+    e.preventDefault();
+
+    const hash = this.hash;
+    const section = select(hash);
+    
+    if (section) {
+      const offset = 100; // Az extra görgetés mértéke
+      const toScroll = section.offsetTop - offset; // Módosítjuk az görgetési célpontot az extra eltolással
+      
+      window.scrollTo({
+        top: toScroll,
+        behavior: 'smooth'
+      });
+
+      // Ha van navbar-mobile osztály, akkor azt is kezeljük
+      if (navbar.classList.contains('navbar-mobile')) {
+        navbar.classList.remove('navbar-mobile');
+        const navToggle = select('.mobile-nav-toggle');
+        navToggle.classList.remove('bx-x');
+        navToggle.classList.remove('feher');
+        navToggle.classList.add('bx-menu');
+      }
+    }
+  }
+}, true); 
   
   window.addEventListener('load', navbarlinksActive);
   onscroll(document, navbarlinksActive);
   
-  const scrollto = el => {
-    const header = select('#header');
-    let offset = header.offsetHeight;
-  
-    if (!header.classList.contains('header-scrolled')) {
-      offset -= 16;
-    }
-  
-    const elementPos = select(el).offsetTop;
-    window.scrollTo({
-      top: elementPos - offset,
-      behavior: 'smooth'
-    });
-  };
   
   const handleHeader = (selectHeader, nextElement) => {
     const headerOffset = selectHeader.offsetTop;
