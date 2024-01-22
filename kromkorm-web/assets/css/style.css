@@ -245,6 +245,18 @@ h6 {
     padding-right: 0px;
 }
 
+.circle{
+  display: none;
+}
+.table-50{
+  width: 100% !important;
+}
+
+
+}
+
+.table-50{
+  width: 50%;
 }
 
 .navbar-mobile {
@@ -626,6 +638,11 @@ li span {
   line-height: 24px;
   font-size: 14px;
   margin-bottom: 0;
+}
+
+.contact_link{
+  text-decoration: none !important;
+  color: #444444 !important;
 }
 
 #footer {
